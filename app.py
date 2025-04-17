@@ -1,6 +1,7 @@
 import streamlit as st
 import qrcode
 from io import BytesIO
+from PIL import Image
 
 st.set_page_config(page_title="QR para PDF OneDrive", layout="centered")
 st.title("📄🔗 Generador de QR para PDFs en la nube")
@@ -22,7 +23,7 @@ if enlace:
             qr = qrcode.QRCode(box_size=8, border=2)
             qr.add_data(enlace)
             qr.make(fit=True)
-            imagen_qr = qr.make_image(fill="black", back_color="white")
+            imagen_qr = qr.make_image(fill_color="black", back_color="white").convert("RGB")
 
             # Mostrar imagen del QR
             st.image(imagen_qr, caption="📱 Escanea este código QR para abrir el PDF")
@@ -45,3 +46,4 @@ if enlace:
 
         except Exception as e:
             st.error(f"❌ Error al generar el código QR: {e}")
+
