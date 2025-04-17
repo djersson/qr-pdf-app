@@ -11,30 +11,31 @@ El código QR funcionará desde cualquier celular, siempre que el enlace esté h
 """)
 
 # Entrada
-link = st.text_input("🔗 Enlace compartido al archivo PDF")
+enlace = st.text_input("🔗 Enlace compartido al archivo PDF")
 
-if link:
-    if not link.startswith("http"):
+if enlace:
+    if not enlace.startswith("http"):
         st.error("❌ El enlace no es válido. Asegúrate de que comience con 'http'")
     else:
         try:
-            # Crear QR
+            # Crear el código QR
             qr = qrcode.QRCode(box_size=8, border=2)
-            qr.add_data(link)
+            qr.add_data(enlace)
             qr.make(fit=True)
-            img = qr.make_image(fill="black", back_color="white")
+            imagen_qr = qr.make_image(fill="black", back_color="white")
 
-            # Mostrar QR
-            st.image(img, caption="📱 Escanea este código QR para abrir el PDF")
+            # Mostrar imagen del QR
+            st.image(imagen_qr, caption="📱 Escanea este código QR para abrir el PDF")
 
-            # Botón para abrir el link
-            st.markdown(f"[📂 Abrir el PDF]({link})", unsafe_allow_html=True)
+            # Mostrar enlace para abrir el PDF directamente
+            st.markdown(f"[📂 Abrir el PDF]({enlace})", unsafe_allow_html=True)
 
-            # Botón para descargar el QR
+            # Convertir la imagen a bytes para permitir la descarga
             buffer = BytesIO()
-            img.save(buffer, format="PNG")
+            imagen_qr.save(buffer, format="PNG")
             buffer.seek(0)
 
+            # Botón para descargar
             st.download_button(
                 label="⬇️ Descargar QR como imagen",
                 data=buffer,
