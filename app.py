@@ -9,6 +9,7 @@ st.title("📄🔗 Generador de QR para PDFs en la nube")
 st.markdown("""
 Pega el **enlace compartido** de un archivo PDF almacenado en OneDrive, Dropbox, Google Drive u otra plataforma en la nube.  
 El código QR funcionará desde cualquier celular, siempre que el enlace esté habilitado para acceso público.
+Desarrollado por: Laboratorio Metalútgico / JDR - 2025
 """)
 
 # Entrada
